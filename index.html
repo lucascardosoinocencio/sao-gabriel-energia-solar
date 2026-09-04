@@ -366,10 +366,17 @@
         <p>&copy; <span id="year"></span> São Gabriel Energia Solar. Todos os direitos reservados.</p>
         <p class="footer__privacy"><a href="privacidade.html">Política de Privacidade</a></p>
       </div>
-      <span class="visit-counter" id="visitCounter" aria-label="Contador de visitas do site">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        <span id="visitCount">···</span> visitas
-      </span>
+      <div class="visit-odometer" id="visitCounter">
+        <span class="visit-odometer__eye" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <div class="visit-odometer__digits" id="visitDigits" aria-hidden="true">
+          <span class="visit-odometer__digit">–</span>
+          <span class="visit-odometer__digit">–</span>
+        </div>
+        <span class="visit-odometer__label" aria-hidden="true">visitas</span>
+        <span class="sr-only" id="visitSrText" aria-live="polite">Carregando contador de visitas</span>
+      </div>
       <a href="https://lucaslabs.netlify.app/" target="_blank" rel="noopener" class="footer__credit">
         <span>Criado por</span>
         <img src="images/logo-lucaslabs-icon.png" alt="" class="footer__credit-logo">

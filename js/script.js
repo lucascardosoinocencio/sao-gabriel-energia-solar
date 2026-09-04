@@ -295,23 +295,51 @@ if (gsapReady && !prefersReducedMotion) {
 --------------------------------------------------------------- */
 (function visitCounter() {
   const wrapper = document.getElementById('visitCounter');
-  const countEl = document.getElementById('visitCount');
-  if (!wrapper || !countEl) return;
+  const digitsEl = document.getElementById('visitDigits');
+  const srTextEl = document.getElementById('visitSrText');
+  if (!wrapper || !digitsEl || !srTextEl) return;
 
   const NAMESPACE = 'saogabriel-energiasolar-ourinhos';
   const KEY = 'site-visits';
   const POLL_INTERVAL_MS = 20000;
   let lastValue = null;
 
+  /* desenha os "roletes": um dígito por janela, "." vira um separador
+     estático fino, sem caixa de rolete (é so o formato pt-BR mesmo) */
+  function renderDigits(formatted, animate) {
+    const chars = formatted.split('');
+    const current = Array.from(digitsEl.children);
+
+    if (current.length !== chars.length) {
+      digitsEl.innerHTML = '';
+      chars.forEach((ch) => {
+        const cell = document.createElement('span');
+        const isSep = ch === '.';
+        cell.className = isSep ? 'visit-odometer__digit visit-odometer__digit--sep' : 'visit-odometer__digit';
+        cell.textContent = ch;
+        digitsEl.appendChild(cell);
+      });
+      return;
+    }
+
+    chars.forEach((ch, i) => {
+      const cell = current[i];
+      if (cell.textContent === ch) return;
+      cell.textContent = ch;
+      if (animate && ch !== '.') {
+        cell.classList.remove('is-rolling');
+        void cell.offsetWidth; /* reinicia a animação mesmo se já rodou */
+        cell.classList.add('is-rolling');
+      }
+    });
+  }
+
   function render(value) {
     if (typeof value !== 'number') return;
-    if (lastValue !== null && value !== lastValue) {
-      countEl.classList.remove('visit-counter__count--pulse');
-      void countEl.offsetWidth; /* reinicia a animação mesmo se já rodou */
-      countEl.classList.add('visit-counter__count--pulse');
-    }
+    const formatted = value.toLocaleString('pt-BR');
+    renderDigits(formatted, value !== lastValue);
+    srTextEl.textContent = `${formatted} visitas`;
     lastValue = value;
-    countEl.textContent = value.toLocaleString('pt-BR');
   }
 
   fetch(`https://abacus.jasoncameron.dev/hit/${NAMESPACE}/${KEY}`)
