@@ -71,23 +71,29 @@ function debounce(fn, delay) {
 const header = document.getElementById('header');
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
+const navBackdrop = document.getElementById('navBackdrop');
 
 window.addEventListener('scroll', () => {
   header.classList.toggle('is-scrolled', window.scrollY > 30);
 }, { passive: true });
 
-burger.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('open');
+function setNavOpen(isOpen) {
+  nav.classList.toggle('open', isOpen);
   burger.classList.toggle('open', isOpen);
   burger.setAttribute('aria-expanded', String(isOpen));
+  if (navBackdrop) navBackdrop.classList.toggle('open', isOpen);
+}
+
+burger.addEventListener('click', () => {
+  setNavOpen(!nav.classList.contains('open'));
 });
 
+if (navBackdrop) {
+  navBackdrop.addEventListener('click', () => setNavOpen(false));
+}
+
 nav.querySelectorAll('.nav__link').forEach((link) => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('open');
-    burger.classList.remove('open');
-    burger.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', () => setNavOpen(false));
 });
 
 /* ---------------------------------------------------------------

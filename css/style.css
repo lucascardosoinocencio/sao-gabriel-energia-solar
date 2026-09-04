@@ -213,7 +213,10 @@ input:focus-visible {
   .header__nav {
     display: flex;
     position: fixed;
-    top: 74px; right: 20px; left: 20px;
+    z-index: 490;
+    /* 100px = altura do header no topo da pagina (logo 80px + padding 10px*2);
+       fica sempre abaixo dele, mesmo antes de rolar a pagina */
+    top: 104px; right: 20px; left: 20px;
     background: var(--white);
     border-radius: var(--radius);
     box-shadow: 0 20px 50px rgba(11, 47, 92, 0.2);
@@ -227,6 +230,20 @@ input:focus-visible {
   }
   .header__nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .header__actions .btn--cta span { display: none; }
+
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 480;
+    background: rgba(11, 47, 92, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .nav-backdrop.open { opacity: 1; pointer-events: auto; }
+}
+@media (min-width: 900px) {
+  .nav-backdrop { display: none; }
 }
 
 /* ===================================================================
