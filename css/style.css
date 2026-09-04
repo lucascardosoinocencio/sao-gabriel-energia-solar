@@ -823,7 +823,11 @@ input:focus-visible {
   text-align: center;
 }
 @media (min-width: 700px) {
-  .footer__bottom-inner { flex-direction: row; justify-content: space-between; padding-right: 76px; }
+  .footer__bottom-inner { flex-direction: row; justify-content: space-between; padding-right: 76px; text-align: left; }
+}
+.footer__legal { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+@media (min-width: 700px) {
+  .footer__legal { align-items: flex-start; }
 }
 .footer__credit {
   display: inline-flex;
@@ -847,8 +851,6 @@ input:focus-visible {
 
 .footer__privacy {
   font-size: 0.875rem;
-  text-align: center;
-  padding-bottom: 20px;
 }
 .footer__privacy a {
   color: rgba(255, 255, 255, 0.72);
