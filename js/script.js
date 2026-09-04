@@ -97,8 +97,14 @@ document.querySelectorAll('.faq__item').forEach((item) => {
   const question = item.querySelector('.faq__question');
   question.addEventListener('click', () => {
     const alreadyOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq__item.open').forEach((open) => open.classList.remove('open'));
-    if (!alreadyOpen) item.classList.add('open');
+    document.querySelectorAll('.faq__item.open').forEach((open) => {
+      open.classList.remove('open');
+      open.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+    });
+    if (!alreadyOpen) {
+      item.classList.add('open');
+      question.setAttribute('aria-expanded', 'true');
+    }
   });
 });
 
@@ -277,3 +283,41 @@ if (gsapReady && !prefersReducedMotion) {
     ScrollTrigger.refresh();
   }, 200));
 }
+
+/* ---------------------------------------------------------------
+   Contador de visitas do site (rodapé), atualizado ao vivo por polling
+--------------------------------------------------------------- */
+(function visitCounter() {
+  const wrapper = document.getElementById('visitCounter');
+  const countEl = document.getElementById('visitCount');
+  if (!wrapper || !countEl) return;
+
+  const NAMESPACE = 'saogabriel-energiasolar-ourinhos';
+  const KEY = 'site-visits';
+  const POLL_INTERVAL_MS = 20000;
+  let lastValue = null;
+
+  function render(value) {
+    if (typeof value !== 'number') return;
+    if (lastValue !== null && value !== lastValue) {
+      countEl.classList.remove('visit-counter__count--pulse');
+      void countEl.offsetWidth; /* reinicia a animação mesmo se já rodou */
+      countEl.classList.add('visit-counter__count--pulse');
+    }
+    lastValue = value;
+    countEl.textContent = value.toLocaleString('pt-BR');
+  }
+
+  fetch(`https://abacus.jasoncameron.dev/hit/${NAMESPACE}/${KEY}`)
+    .then((res) => res.json())
+    .then((data) => render(data.value))
+    .catch(() => wrapper.remove());
+
+  setInterval(() => {
+    if (!document.body.contains(wrapper) || document.hidden) return;
+    fetch(`https://abacus.jasoncameron.dev/get/${NAMESPACE}/${KEY}`)
+      .then((res) => res.json())
+      .then((data) => render(data.value))
+      .catch(() => {});
+  }, POLL_INTERVAL_MS);
+})();

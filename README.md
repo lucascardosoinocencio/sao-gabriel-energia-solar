@@ -21,15 +21,18 @@ Página única (one-page), construída em HTML, CSS e JavaScript puros, sem fram
 - Como funciona (processo em 4 passos)
 - Galeria de trabalhos e equipamentos
 - FAQ em acordeão
-- CTA final e rodapé com contato e área de atendimento
+- CTA final e rodapé com contato, área de atendimento e contador de visitas ao vivo
 - Botão flutuante de WhatsApp fixo
+- Página de [Política de Privacidade](privacidade.html) (LGPD)
 
 ### Destaques técnicos
 
 - **Animações de scroll com [GSAP](https://gsap.com/) + ScrollTrigger**: barra de progresso de leitura, parallax no hero e na faixa de impacto, entrada em stagger dos cards, respeitando `prefers-reduced-motion`.
 - **Performance**: animações limitadas a `transform`/`opacity` (GPU), `loading="lazy"` nas imagens abaixo da dobra, `ScrollTrigger.refresh()` com debounce no resize.
-- **Mobile-first e responsivo**: testado de 360px a 2560px de largura.
-- **Acessibilidade**: texto alternativo para leitor de tela no efeito de digitação, navegação por teclado nos elementos interativos, contraste adequado nos textos sobre imagem.
+- **Mobile-first e responsivo**: testado de 360px a 2560px de largura, com menu mobile em efeito de vidro (`backdrop-filter`).
+- **Acessibilidade**: `aria-expanded`/`aria-controls` no acordeão de FAQ, link "pular para o conteúdo", anel de foco visível em todos os elementos interativos, contraste WCAG AA nos textos sobre imagem e no rodapé.
+- **Compartilhamento**: metatags Open Graph e Twitter Card com imagem de pré-visualização própria (`images/og-image.png`) para quando o link é enviado no WhatsApp ou redes sociais.
+- **Contador de visitas**: atualização em tempo real no rodapé via polling, discreto e nas cores da marca.
 
 ## Stack
 
@@ -44,6 +47,7 @@ Página única (one-page), construída em HTML, CSS e JavaScript puros, sem fram
 ```
 .
 ├── index.html
+├── privacidade.html
 ├── css/
 │   └── style.css
 ├── js/
