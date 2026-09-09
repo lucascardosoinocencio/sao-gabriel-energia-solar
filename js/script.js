@@ -159,13 +159,15 @@ if (gsapReady) {
 }
 
 if (gsapReady && !prefersReducedMotion) {
-  /* Entrada do hero ao carregar a página */
-  gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .from('.badge', { opacity: 0, y: 20, duration: 0.6 })
-    .from('.hero__title', { opacity: 0, y: 30, duration: 0.7 }, '-=0.35')
-    .from('.hero__subtitle', { opacity: 0, y: 24, duration: 0.7 }, '-=0.45')
-    .from('.hero__cta .btn', { opacity: 0, y: 20, duration: 0.6, stagger: 0.12 }, '-=0.4')
-    .from('.trust__item', { opacity: 0, y: 16, duration: 0.5, stagger: 0.1 }, '-=0.3');
+  /* Entrada do hero ao carregar a página: só opacidade, sem deslocamento
+     (y). Acontece acima da dobra, no carregamento, e "y" via transform
+     ainda conta como CLS (Core Web Vitals) mesmo sendo GPU-only. */
+  gsap.timeline({ defaults: { ease: 'power2.out' } })
+    .from('.badge', { opacity: 0, duration: 0.6 })
+    .from('.hero__title', { opacity: 0, duration: 0.7 }, '-=0.35')
+    .from('.hero__subtitle', { opacity: 0, duration: 0.7 }, '-=0.45')
+    .from('.hero__cta .btn', { opacity: 0, duration: 0.6, stagger: 0.12 }, '-=0.4')
+    .from('.trust__item', { opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.3');
 
   /* Parallax do fundo do hero, escala fixa para não revelar bordas */
   gsap.set('.hero__img', { scale: 1.15, transformOrigin: 'center center' });

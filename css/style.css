@@ -821,7 +821,7 @@ input:focus-visible {
 @media (min-width: 700px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
 .footer__logo { height: 60px; border-radius: 12px; margin-bottom: 14px; background: var(--white); padding: 4px; }
 .footer__brand p { font-size: 0.88rem; color: rgba(255,255,255,0.6); }
-.footer__col h4 { font-family: var(--font-head); color: var(--white); font-size: 1rem; margin-bottom: 16px; }
+.footer__col h3 { font-family: var(--font-head); color: var(--white); font-size: 1rem; margin-bottom: 16px; }
 .footer__col a, .footer__col p { display: block; font-size: 0.92rem; margin-bottom: 10px; color: rgba(255,255,255,0.75); }
 .footer__col a:hover { color: var(--yellow); }
 .footer__bottom {
@@ -860,7 +860,7 @@ input:focus-visible {
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.85);
 }
-.footer__credit-name b { color: var(--blue-light); font-weight: 800; }
+.footer__credit-name b { color: var(--yellow); font-weight: 800; }
 .footer__credit:hover .footer__credit-name { color: #ffffff; }
 
 .footer__privacy {
