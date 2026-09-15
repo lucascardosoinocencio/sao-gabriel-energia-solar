@@ -716,6 +716,56 @@ input:focus-visible {
 .gallery__item:hover img { transform: scale(1.1); }
 
 /* ===================================================================
+   ANTES E DEPOIS
+   =================================================================== */
+.results { background: var(--white); padding: 90px 0; }
+.results__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+.results__pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: var(--gray-bg);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: 0 10px 30px -10px rgba(11,47,92,0.2);
+}
+.results__photo {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.results__photo:first-child { border-radius: 12px 0 0 12px; }
+.results__photo:last-child { border-radius: 0 12px 12px 0; }
+.results__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.results__tag {
+  position: absolute;
+  top: 10px; left: 10px;
+  z-index: 1;
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.results__tag--before { background: rgba(16, 35, 63, 0.72); }
+.results__tag--after { background: var(--gradient-sun); color: var(--blue-navy); }
+.results__caption {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ===================================================================
    FAQ
    =================================================================== */
 .faq { padding: 90px 0; background: var(--white); }
