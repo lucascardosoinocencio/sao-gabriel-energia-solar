@@ -1,5 +1,4 @@
 {
-  "routes": [
-    { "src": "/(.*)", "headers": { "X-Robots-Tag": "noindex, nofollow" }, "dest": "/suspenso/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/suspenso/index.html" }],
+  "headers": [{ "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }]
 }
