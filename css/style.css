@@ -910,7 +910,7 @@ input:focus-visible {
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.85);
 }
-.footer__credit-name b { color: var(--yellow); font-weight: 800; }
+.footer__credit-name b { color: #4da3ff; font-weight: 800; }
 .footer__credit:hover .footer__credit-name { color: #ffffff; }
 
 .footer__privacy {
